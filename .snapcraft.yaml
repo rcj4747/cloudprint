@@ -1,0 +1,25 @@
+name: cloudprint
+version: 1
+summary: Google cloudprint proxy
+description: |
+        Share your CUPS printer with Google's cloud print.
+        
+        After installation this snap requires explicit permission to
+        interact with CUPS.  This can be done by running
+         $ snap connect cloudprint:cups-control ubuntu-core:cups-control
+confinement: strict
+
+apps:
+  cloudprint:
+    command: usr/bin/cloudprint
+    plugs:
+    - cups-control
+    - network
+    - network-bind
+
+parts:
+  cloudprint:
+    plugin: python2
+    source: .
+    stage-packages:
+    - libcups2-dev
